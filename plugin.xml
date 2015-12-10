@@ -8,6 +8,10 @@
     <license>MIT</license>
     <keywords>cordova,webintent</keywords>
 
+    <preference name="SCHEME" />
+    <preference name="HOST" />
+    <preference name="PATH_PATTERN" />
+
     <js-module src="www/webintent.js" name="WebIntent">
         <clobbers target="WebIntent" />
     </js-module>
@@ -21,5 +25,19 @@
         </config-file>
 
         <source-file src="src/android/WebIntent.java" target-dir="src/com/borismus/webintent" />
+
+        <config-file target="AndroidManifest.xml" parent="/*/application/activity">
+           <intent-filter>
+              <action android:name="android.intent.action.VIEW"/>
+              <category android:name="android.intent.category.DEFAULT"/>
+              <category android:name="android.intent.category.BROWSABLE"/>
+              <data
+                  android:scheme="$SCHEME"
+                  android:host="$HOST"
+                  android:pathPattern="$PATH_PATTERN"      
+               />
+          </intent-filter>
+       </config-file>
+
     </platform>
 </plugin>
